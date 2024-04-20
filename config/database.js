@@ -1,25 +1,18 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('postgres://koyeb-adm:2vpMiaUo0PZQ@ep-sparkling-hall-a2tgjqmz.eu-central-1.pg.koyeb.app/koyebdb', {
-
-  dialect: "postgres",
-  logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
+const sequelize = new Sequelize('neetprep', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql', // Use 'mysql' dialect for MySQL database
+  port: 3306, // MySQL default port
 });
 
 sequelize
-  .sync()
+  .authenticate()
   .then(() => {
-    console.log("Database connected");
+    console.log('Database connected');
   })
   .catch((err) => {
-    console.log(err);
-    console.log("Unable to connect to database");
+    console.error('Unable to connect to the database:', err);
   });
 
 module.exports = sequelize;
